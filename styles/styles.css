@@ -216,22 +216,3 @@ body {
     opacity: 1;
     transition: opacity 2s;
 }
-
-.glow {
-  position: absolute;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  animation: glow 1s ease-out infinite alternate;
-}
-
-@keyframes glow {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
