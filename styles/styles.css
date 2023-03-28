@@ -216,3 +216,32 @@ body {
     opacity: 1;
     transition: opacity 2s;
 }
+
+.element {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.5s ease-in-out;
+}
+
+.element:hover {
+  transform: scale(1.1);
+}
+
+.element::before,
+.element::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.7);
+}
+
+.element:hover::before,
+.element:hover::after {
+  opacity: 1;
+}
