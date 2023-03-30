@@ -17,18 +17,3 @@ document.querySelectorAll('.card');
 for (let elm of elements) {
     observer.observe(elm);
 }
-
-const elements = document.querySelectorAll('.hidden');
-
-function checkScroll() {
-  for (let i = 0; i < elements.length; i++) {
-    const element = elements[i];
-    const position = element.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-    if (position < windowHeight) {
-      element.classList.add('reveal');
-    }
-  }
-}
-
-window.addEventListener('scroll', checkScroll);
