@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доступ ограничен</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+        :root {
+            --background: #0a0a0c;
+            --error: #ff3e3e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .abstract-background {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            opacity: 0.8;
+            filter: blur(80px);
+            background: linear-gradient(
+                45deg,
+                rgba(255, 62, 62, 0.4),
+                rgba(255, 0, 0, 0.4),
+                rgba(208, 0, 0, 0.4)
+            );
+            animation: morphBackground 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes morphBackground {
+            0% {
+                border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+            }
+            50% {
+                border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+            }
+            100% {
+                border-radius: 40% 60% 30% 70%/40% 40% 60% 50%;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.2),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            max-width: 580px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 2px;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 62, 62, 0.2),
+                rgba(255, 62, 62, 0.1),
+                rgba(255, 62, 62, 0.2)
+            );
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .icon {
+            margin-bottom: 1.5rem;
+            position: relative;
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .icon::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 62, 62, 0.2);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(30px);
+            z-index: -1;
+        }
+
+        .icon svg {
+            width: 48px;
+            height: 48px;
+            color: var(--error);
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.75rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+
+        .detail-value {
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.875rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .info {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.75rem;
+            }
+            
+            .details {
+                padding: 1rem;
+            }
+            
+            .detail-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .abstract-background::before,
+        .abstract-background::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background: inherit;
+            animation: morphBackground 12s ease-in-out infinite alternate-reverse;
+        }
+
+        .abstract-background::after {
+            animation-duration: 18s;
+            opacity: 0.7;
+            filter: blur(90px);
+        }
+    </style>
+</head>
+<body>
+    <div class="abstract-background"></div>
+    <div class="container">
+        <div class="icon pulse">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+        </div>
+        <h1>Доступ ограничен</h1>
+        <p>Доступ к этому ресурсу был заблокирован в соответствии с политикой безопасности. Если вы считаете, что это ошибка, обратитесь к администратору.</p>
+        
+        <div class="details">
+            <div class="detail-item">
+                <span class="detail-label">IP адрес</span>
+                <span class="detail-value">::CLIENT_IP::</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Местоположение</span>
+                <span class="detail-value">::GEO::</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Ray ID</span>
+                <span class="detail-value">::RAY_ID::</span>
+            </div>
+        </div>
+
+        <div class="info">
+            Если вам нужна помощь, сохраните Ray ID для обращения в службу поддержки
+        </div>
+    </div>
+</body>
+</html>
